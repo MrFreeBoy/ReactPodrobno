@@ -1,5 +1,6 @@
 import React, {ChangeEvent, useRef, useState} from 'react';
 import {ComponentStory, ComponentMeta} from '@storybook/react';
+import {action} from "@storybook/addon-actions";
 
 
 export default {
@@ -34,6 +35,38 @@ export const GetValueOfUnControlledInputByButtonPress = () => {
         </button>
         - actual value: {value} </>
 }
+
+export const ControlledInput = () => {
+    const [parentValue, setParenValue] = useState("");
+
+    const onChange = (e: ChangeEvent<HTMLInputElement>)=>{setParenValue(e.currentTarget.value)}
+
+    return <input value={parentValue} onChange={onChange}/>
+};
+
+export const ControlledCheckbox = () => {
+
+    const [parentValue, setParenValue] = useState(true);
+
+    const onChange = (e: ChangeEvent<HTMLInputElement>)=>{setParenValue(e.currentTarget.checked)}
+
+    return <input type="checkbox" checked={parentValue} onChange={onChange}/>
+
+};
+
+export const ControlledSelect = () => {
+
+    const [parentValue, setParenValue] = useState<string | undefined>(undefined);
+
+    const onChange = (e: ChangeEvent<HTMLSelectElement>)=>{setParenValue(e.currentTarget.value)}
+
+    return <select value={parentValue} onChange={onChange}>
+        <option>none</option>
+        <option value={"1"}>Minsk</option>
+        <option value={"2"}>Moscow</option>
+        <option value={"2"}>Omsk</option>
+        </select>
+};
 
 
 export const ControlledInputWithFixedValue = () => <input value={"it-huiti"}/>
